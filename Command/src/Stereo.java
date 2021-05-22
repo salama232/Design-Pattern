@@ -1,8 +1,9 @@
 
-public class Light  {
+public class Stereo {
 	String classname;
-	public Light(String classname)
-	{       
+	
+	public Stereo(String classname)
+	{
 			this.classname=classname;	
 	}
 	public void on ()
@@ -13,14 +14,20 @@ public class Light  {
 	{
 		System.out.println("light off ");
 	}
-	public void dim ()
+	public void SetCD ()
 	{
-		System.out.println("light dim ");
+		System.out.println("CD SET");
 	}
+	
+	public void setVolume(int volume)
+	{
+		System.out.println("CD volume"+volume);
+
+	}
+	
 	@Override
 	public String toString() {
 		return  classname;
 	}
-  
 	
 }

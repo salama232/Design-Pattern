@@ -1,28 +1,62 @@
 
 public class SimpleRemoteControl {
 
-    Command slot1;
-    
-    
-    public SimpleRemoteControl()
+    Command[] OnButton;
+    Command[] OffButton;
+    Command undoCommand;
+ 
+
+	public SimpleRemoteControl()
     {
-    	
+		OnButton =new Command[7];
+		OffButton =new Command[7];
+		
+		Command nocommand=new NoCommand();
+		
+		for (int i=0;i<OnButton.length;i++) {
+			OnButton[i] =nocommand;
+			OffButton[i] =nocommand;
+    }	
+		undoCommand=nocommand;
     }
-
-
-	public Command getSlot1() {
-		return slot1;
-	}
-
-
-	public void setSlot1(Command slot1) {
-		this.slot1 = slot1;
-	}
-    
-	public void ButtonPressed()
+	
+	public void setCommand(int slot,Command onCommand,Command offCommand)
 	{
-		slot1.execute();
+		this.OnButton[slot]=onCommand;
+		this.OffButton[slot]=offCommand;
+		
+		
+		
 	}
-   
-    
+	
+	public void onButtonPushed(int slot)
+	{ if (OnButton[slot] != null)
+	{
+		OnButton[slot].execute();
+		undoCommand=OnButton[slot];
+	}
+	}
+	
+	public void offButtonPushed(int slot)
+	{	if (OffButton[slot] != null)
+	{
+		OffButton[slot].execute();
+		undoCommand=OnButton[slot];
+	}
+	}
+	public String toString() {
+		StringBuffer stringBuff = new StringBuffer();
+		stringBuff.append("\n------ Remote Control -------\n");
+		for (int i = 0; i < OnButton.length; i++) {
+			if (OffButton[i] != null)
+		stringBuff.append("[slot " + i + "] " + OnButton[i].getClass().getName()
+		+ " " + OffButton[i].getClass().getName() + "\n");
+		}
+		return stringBuff.toString();
+		}
+	
+	public void undoButton()
+	{
+		undoCommand.undo();
+	}
 }
