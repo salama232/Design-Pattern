@@ -30,19 +30,17 @@ public class SimpleRemoteControl {
 	}
 	
 	public void onButtonPushed(int slot)
-	{ if (OnButton[slot] != null)
-	{
+	{ 
 		OnButton[slot].execute();
 		undoCommand=OnButton[slot];
-	}
+	
 	}
 	
 	public void offButtonPushed(int slot)
-	{	if (OffButton[slot] != null)
-	{
+	{	
 		OffButton[slot].execute();
 		undoCommand=OnButton[slot];
-	}
+	
 	}
 	public String toString() {
 		StringBuffer stringBuff = new StringBuffer();
